@@ -1,0 +1,724 @@
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<script>
+    var phone_mode = false;
+    var TV = false;
+    var img_id;
+    var t_c
+    var Liveswiper;
+    var Schoolswiper;
+    var OldStudentswiper;
+    var Vlogswiper;
+    var timec_up = false;
+    var imgid
+    var imgbackid
+    var ply_id
+    var ply_class
+    var player;
+    var videoplace;
+    var preview = false;
+    var videoIDD
+    //手機板貓咪講話
+    function timecount_up() {
+        clearInterval(t_c);
+        if (!timec_up) {
+            $("#phone_timecount").css({
+                "visibility": "visible"
+            })
+            // $("#phone_timecount").fadeIn(600).delay(3000).fadeOut(600);
+            t_c = setInterval(function () {
+                $("#phone_timecount").fadeIn(600).delay(10000).fadeOut(600);
+            }, 20000);
+            timec_up = true;
+        }
+    }
+
+    //youtube撥放器
+    // This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    function onYouTubeIframeAPIReady(vID) {
+        if (!vID) return;
+        videoIDD = vID
+        if (phone_mode) {
+            ply = "player" + vID
+            player = new YT.Player(ply, {
+                videoId: vID,
+                allowfullscreen: true,
+                cc_load_policty: 1,
+                playerVars: { //自訂參數
+                    'playsinline': 1 //在iOS的播放器中全屏播放，0:全屏(默認)，1:內嵌
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': yt.onPlayerStateChange
+                }
+            })
+        }
+        //  else if (preview) {
+        //     var p = 'plyplc' + vID
+        //     player = new YT.Player(p, {
+        //         videoId: vID, // YouTube 影片ID
+        //         playerVars: {
+        //             autoplay: 1, // 自動播放影片
+        //             controls: 0, // 顯示播放器
+        //             showinfo: 0, // 隱藏影片標題
+        //             modestbranding: 0, // 隱藏YouTube Logo
+        //             loop: 1, // 重覆播放
+        //             fs: 0, // 隱藏全螢幕按鈕
+        //             cc_load_policty: 0, // 隱藏字幕
+        //             iv_load_policy: 3, // 隱藏影片註解
+        //             autohide: 0 // 影片播放時，隱藏影片控制列
+        //         },
+        //         events: {
+        //             onReady: function (e) {
+        //                 e.target.mute(); //播放時靜音
+        //             }
+        //         }
+        //     });
+        // }
+        else {
+            TV = true;
+            player = new YT.Player("video_place", {
+                videoId: vID,
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': yt.onPlayerStateChange
+                }
+            })
+            $("#video_place").delay(100)
+            $("#video_place").animate({
+                height: "36.9vw",
+            }, 500)
+        }
+    }
+    var getcl;
+    var getone = [false, false, false, false, false]
+
+    function onPlayerReady() {
+        player.playVideo();
+        //每一秒抓取一次現在影片的秒數
+        getcl = setInterval(function () {
+            var sec = player.getCurrentTime();
+            if (videoIDD == 'oPAD_pQEkD0' || videoIDD == 'dpNMfje74aE' || videoIDD == 'Jggwl4SR89Y' ||
+                videoIDD == 'QR7m_5hxyqM') {
+                if (sec > 20 && sec < 30) {
+                    getone[0] = true;
+                } else if (sec > 70 && sec < 80) {
+                    getone[1] = true;
+                } else if (sec > 100 && sec < 110) {
+                    getone[2] = true;
+                } else if (sec > 130 && sec < 140) {
+                    getone[3] = true;
+                } else if (sec > 160 && sec < 170) {
+                    getone[4] = true;
+                }
+            }
+            if (videoIDD == 'S3o_OtModJo' || videoIDD == 'ySij9UQKPRw' || videoIDD == 'NbC86T84yak' ||
+                videoIDD == '_ZxpBpCwODs' || videoIDD == "F3-HHQbUUC0") {
+                if (sec > 40 && sec < 50) {
+                    getone[0] = true
+                } else if (sec > 90 && sec < 100) {
+                    getone[1] = true
+                } else if (sec > 140 && sec < 150) {
+                    getone[2] = true
+                } else if (sec > 190 && sec < 200) {
+                    getone[3] = true
+                } else if (sec > 240 && sec < 250) {
+                    getone[4] = true
+                }
+            }
+            if (videoIDD == 'HxAW3uVV-fM' || videoIDD == 'UPBTHdg9HJ4' || videoIDD == 'jLMhs8BEPyM') {
+                if (sec > 90 && sec < 100) {
+                    getone[0] = true
+                } else if (sec > 190 && sec < 200) {
+                    getone[1] = true
+                } else if (sec > 290 && sec < 300) {
+                    getone[2] = true
+                } else if (sec > 390 && sec < 400) {
+                    getone[3] = true
+                } else if (sec > 490 && sec < 500) {
+                    getone[4] = true
+                }
+            }
+        }, 500);
+    }
+
+    function getclothing() {
+        var yes = true;
+        for (var i = 0; i < 5; i++) {
+            if (!getone[i]) yes = false
+        }
+        if (yes) {
+            var info
+            var ind
+            if (videoIDD == 'S3o_OtModJo') { //食
+                info = ["hair", "頭髮", "3-3"]
+                ind = 9;
+            } else if (videoIDD == 'HxAW3uVV-fM') { //住
+                info = ["face", "表情", "8-1"]
+                ind = 22
+            } else if (videoIDD == 'UPBTHdg9HJ4') { //行
+                info = ["hair", "頭髮", "6-1"]
+                ind = 16
+            } else if (videoIDD == 'ySij9UQKPRw') { //育
+                info = ["hair", "頭髮", "6-3"]
+                ind = 18
+            } else if (videoIDD == 'NbC86T84yak') { //樂
+                info = ["hair", "頭髮", "7-2"]
+                ind = 20
+            } else if (videoIDD == 'oPAD_pQEkD0') { //復活
+                info = ["hair", "頭髮", "7-3"]
+                ind = 21
+            } else if (videoIDD == 'dpNMfje74aE') { //打工
+                info = ["hair", "頭髮", "8-2"]
+                ind = 23
+            } else if (videoIDD == 'jLMhs8BEPyM') { //風向
+                info = ["face", "表情", "1-3"]
+                ind = 3
+            } else if (videoIDD == '_ZxpBpCwODs') { //通識
+                info = ["face", "表情", "3-1"]
+                ind = 7
+            } else if (videoIDD == 'Jggwl4SR89Y') { //校歌
+                info = ["face", "表情", "3-2"]
+                ind = 8
+            } else if (videoIDD == 'F3-HHQbUUC0') { //選課
+                info = ["face", "表情", "3-3"]
+                ind = 9
+            } else if (videoIDD == 'QR7m_5hxyqM') { //Vlog
+                info = ["face", "表情", "7-2"]
+                ind = 20
+            }
+            $.ajax({
+                url: "/personal/unlockOutfit",
+                method: 'POST',
+                data: {
+                    type: info[0],
+                    index: ind
+                },
+                dataType: 'JSON',
+                error: function (err) {},
+                success: function (data) {
+                    if (data.lock == "yes") {
+                        $("#getnewoutfit").text(info[1]);
+                        var s = "/personal/" + info[0] + "/" + info[2] + ".png"
+                        $("#getnewimg").attr("src", s);
+                        $("#unlockModal").modal('show');
+                    } else if (data.lock == "no") {}
+                }
+            });
+        }
+        for (var i = 0; i < 5; i++) {
+            getone[i] = false;
+        }
+    }
+
+    //video停止撥放
+    function stop() {
+        clearInterval(getcl);
+        player.destroy()
+        getclothing()
+        TV = false;
+        if (phone_mode) {
+            $("#phone_grass").css({
+                "visibility": "visible"
+            })
+            timecount_up()
+        }
+    }
+    $(document).ready(function () {
+
+        // youtube手機板不能放大的問題
+        $(".ytfullscreen").click(function () {
+            var e = document.getElementById("yrc-player-frame-0");
+            if (e.requestFullscreen) {
+                e.requestFullscreen();
+            } else if (e.webkitRequestFullscreen) {
+                e.webkitRequestFullscreen();
+            } else if (e.mozRequestFullScreen) {
+                e.mozRequestFullScreen();
+            } else if (e.msRequestFullscreen) {
+                e.msRequestFullscreen();
+            }
+        });
+        //拿衣服
+        $("#time_a").click(function () {
+            $.ajax({
+                url: "/personal/unlockOutfit",
+                method: 'POST',
+                data: {
+                    type: "face",
+                    index: 23
+                },
+                dataType: 'JSON',
+                error: function (err) {},
+                success: function (data) {
+                    if (data.lock == "yes") {
+                        $("#getnewoutfit").text("表情");
+                        $("#getnewimg").attr("src", "/personal/face/8-2.png");
+                        $("#unlockModal").modal('show');
+                    } else if (data.lock == "no") {}
+                }
+            });
+        })
+        $("#p_c").click(function () {
+            $.ajax({
+                url: "/personal/unlockOutfit",
+                method: 'POST',
+                data: {
+                    type: "face",
+                    index: 23
+                },
+                dataType: 'JSON',
+                error: function (err) {},
+                success: function (data) {
+                    if (data.lock == "yes") {
+                        $("#getnewoutfit").text("表情");
+                        $("#getnewimg").attr("src", "/personal/face/8-2.png");
+                        $("#unlockModal").modal('show');
+                    } else if (data.lock == "no") {}
+                }
+            });
+        })
+
+
+        //??
+        // window.addEventListener('scroll', function () {
+        //     var y = this.scrollY;
+        //     var imgidposi;
+        //     console.log("rr", $("#r2bar").offset().top);
+        //     if (y == 0) {
+        //         imgidposi = "#l1"
+        //     } else if (y == 359) {
+        //         imgidposi = "#l2"
+        //     } else if (y == 683) {
+        //         imgidposi = "#r2"
+        //     }
+        // })
+        //menu
+        //電腦版點我拿時數
+        $("#timecount").mouseover(function () {
+            $(this).css({
+                "display": "none"
+            })
+            $("#timecounthover").css({
+                "display": "flex"
+            })
+        })
+        $("#timecount").mouseout(function () {
+            $(this).css({
+                "display": "flex"
+            })
+            $("#timecounthover").css({
+                "display": "none"
+            })
+        })
+
+
+
+        $(window).resize(function () {
+            phone_check()
+        });
+        // header
+        $("#menu-btn").click(function (evt) {
+            if ($("#header-menu").hasClass("show")) { //點選menu讓貓咪安靜
+                timecount_up();
+            } else {
+                $("#phone_timecount").css({
+                    "visibility": "hidden"
+                })
+                clearInterval(t_c)
+                timec_up = false;
+            }
+            $("#header-menu").toggleClass("show")
+        })
+        $("#personal-avatar").click(function (evt) {
+            $("#personal-menu").toggleClass("show")
+        })
+        $(window).click(function (evt) {
+            if (!evt.target.matches('#menu-btn') && !evt.target.matches('#header-menu *')) {
+                if ($("#header-menu").hasClass('show')) {
+                    $("#header-menu").removeClass("show");
+                }
+            }
+            if (!evt.target.matches('#personal-avatar') && !evt.target.matches(
+                    '#personal-menu *')) {
+                if ($("#personal-menu").hasClass('show')) {
+                    $("#personal-menu").removeClass("show");
+                }
+            }
+        })
+
+        //menu
+
+        $('.menubtn').mouseover(function () {
+            imgid = '#' + $(this).children('.menu_inti_posi').children('.img_size')[0].id
+            imgbackid = '#b' + $(this).children('.menu_inti_posi').children('.img_size')[0].id
+            imgcat = '#' + $(this).children('.menu_inti_posi').children('.img_size')[0].id + "arrow"
+            $(imgid).hide()
+            if (!phone_mode) {
+                $(imgcat).css({
+                    "visibility": "visible"
+                })
+            }
+        })
+        $('.menubtn').mouseout(function () {
+            $(imgid).show();
+            if (!phone_mode) {
+                $(imgcat).css({
+                    "visibility": "hidden"
+                })
+            }
+        })
+        // $(".imgbox").css("height", $(this).width());
+
+        //content
+        //電腦
+        //開啟video
+        $(".swiper-slide>img").click(function () {
+            console.log("here2");
+
+            video_img_id = $(this)[0].id.split("$")
+            vd_id = video_img_id[1];
+            videoplace = 'video_place'
+            onYouTubeIframeAPIReady(vd_id)
+        })
+        //關閉video
+        $('.modal').click(function () {
+            if (TV) {
+                stop();
+            }
+        })
+        //手機
+        var startvideo = [
+            function () {
+                $(this).parent().parent().animate({
+                    width: "100%"
+                }, 10)
+                $(this).parent().parent().animate({
+                    height: "75vw"
+                }, next)
+            },
+            function () {
+                TV = true;
+                testclick = false;
+                $(this).parent().parent().addClass("smallshowing") //ok
+                $(this).parent().addClass("phone_playerclass") //ok
+                $(this).parent().css("height", "100%"); //ok
+                next();
+            },
+            function () {
+                $(img_id).addClass("bye");
+                $(img_id).removeClass("test")
+                $(ply_id).removeClass("bye")
+                $(ply_id).addClass("smallshowTV")
+            }
+        ]
+
+        function next() {
+            $(img_id).dequeue("my1")
+        }
+        var endq = [
+            function () {
+                TV = false;
+                $(this).parent().parent().removeClass("smallshowing")
+                $(this).parent().removeClass("phone_playerclass")
+                $(this).parent().css("height", "220px");
+                $(img_id).parent().parent().animate({
+                    width: "100%",
+                    height: "197px"
+                }, endnext)
+            }
+        ]
+
+        function endnext() {
+            $(img_id).dequeue("my2")
+        }
+
+        function stopvid() {
+            $(ply_id).removeClass("smallshowTV")
+            $("#virtualshowbox").css({
+                width: "0px",
+                height: "9vw"
+            })
+            $(ply_id).addClass("bye")
+            $(img_id).removeClass("bye");
+            $(img_id).addClass("test");
+            $(img_id).queue("my2", endq);
+            endnext();
+            stop();
+        }
+
+        $('.player_class>.test').click(function () { //點擊圖片
+            console.log("here")
+            if (TV) {
+                stopvid();
+            }
+            if (!TV) {
+                ply_class = $(this).parent()[0].id //純ID
+                onYouTubeIframeAPIReady(ply_class);
+                img_id = $(this)[0].id; //圖片的ID
+                img_id = "#" + img_id;
+                ply_id = "#" + $(this).siblings()[0].id //撥放影片的ID
+                $(this).queue("my1", startvideo);
+                clearInterval(t_c);
+                timec_up = false;
+                $("#phone_timecount").css({
+                    "display": "none"
+                })
+                $("#virtualshowbox").css({
+                    width: "100%",
+                    height: "40vw"
+                })
+                $("#phone_grass").css({
+                    "visibility": "hidden"
+                })
+                next();
+            }
+        })
+        $(document).on('click', ':not(#' + ply_class + ')', function () {
+            if (TV && phone_mode) {
+                stopvid();
+            }
+        })
+
+        $("#box4").click(function () {
+            if (TV && phone_mode) {
+                stopvid()
+            }
+        })
+        // 電腦版的方便功能
+        $(".btnimg").mouseover(function () {
+            if (!preview) {
+                console.log("inside");
+                preview = true;
+                var vdid = $(this)[0].id.split("$")
+                vd_id2 = vdid[1];
+                videoplace = "plyplc" + vd_id2
+                onYouTubeIframeAPIReady(vd_id2);
+                var imgiiid = '#img$' + vd_id2
+                // console.log(imgiiid)
+                // $(imgiiid).hide();
+                var plyplc = "#" + videoplace;
+                $(plyplc).css({
+                    "display": "flex",
+                })
+            }
+        })
+        $(".btnimg").mouseout(function () {
+            console.log("out")
+            if (preview) {
+
+                var vdid = $(this)[0].id.split("$")
+                vd_id2 = vdid[1];
+                var plyplc = "#plyplc" + vd_id2;
+                var imgiiid = '#img$' + vd_id2
+                // $(imgiiid).show();
+                $(plyplc).css({
+                    "display": "none",
+                })
+                preview = false;
+                stop();
+            }
+        })
+        //檢查螢幕大小
+        function phone_check() {
+            wdth = $(window).width();
+            height = $(window).height();
+            var video_count = 4;
+            if (height > 400) {
+                if (wdth > 1033 && wdth <= 1200) {
+                    video_count = 3;
+                } else if (wdth > 745 && wdth <= 1033) {
+                    video_count = 2;
+                }
+            }
+            if (wdth < 745 || height < 400) { //手機板
+                timecount_up();
+                $("#phone_grass").css({
+                    "visibility": "visible"
+                })
+                phone_mode = true;
+            } else { //電腦版
+                clearInterval(t_c)
+                timec_up = false;
+                $("#phone_grass").css({
+                    "visibility": "hidden"
+                })
+                $("#phone_timecount").css({
+                    "display": "none",
+                })
+                phone_mode = false;
+                Liveswiper = new Swiper('#Live_container', {
+                    slidesPerView: video_count,
+                    slidesPerGroup: video_count,
+                    loop: true,
+                    loopFillGroupWithBlank: true,
+                    pagination: {
+                        el: '#Live_pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '#Live_r',
+                        prevEl: '#Live_l'
+                    },
+                });
+                Schoolswiper = new Swiper('#School_container', {
+                    slidesPerView: video_count,
+                    slidesPerGroup: video_count,
+                    loop: true,
+                    loopFillGroupWithBlank: true,
+                    pagination: {
+                        el: '#School_pagination',
+                        clickable: true,
+                    },
+
+                    navigation: {
+                        nextEl: '#School_r',
+                        prevEl: '#School_l'
+                    },
+                });
+                OldStudentswiper = new Swiper('#OldStudent_container', {
+                    slidesPerView: video_count,
+                    slidesPerGroup: video_count,
+                    loop: true,
+                    loopFillGroupWithBlank: true,
+                    pagination: {
+                        el: '#OldStudent_pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '#OldStudent_r',
+                        prevEl: '#OldStudent_l'
+                    },
+                });
+                Vlogswiper = new Swiper('#Vlog_container', {
+                    slidesPerView: video_count,
+                    slidesPerGroup: video_count,
+                    loop: true,
+                    loopFillGroupWithBlank: true,
+                    pagination: {
+                        el: '#Vlog_pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '#Vlog_r',
+                        prevEl: '#Vlog_l'
+                    },
+                });
+            }
+        }
+        phone_check()
+        //後台
+
+        // delete
+        // var del_type = "Live";
+        // var add_sel = `
+        //     <% for(var i=0; i<Live[0].length; i++) {%>
+        //         <option class="slc"><%=Live[0][i]%></option>
+        //         <% } %>`;
+        // $("#f_c").after(add_sel)
+        // $('#del_type').change(function () {
+        //     del_type = $('#del_type').val();
+        //     $("option").remove(".slc");
+        //     switch (del_type) {
+        //         case "PartTimeJob":
+        //             add_sel = `
+        //     <% for(var i=0; i<PartTimeJob[0].length; i++) {%>
+        //         <option class="slc"><%=PartTimeJob[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "School":
+        //             add_sel = `
+        //     <% for(var i=0; i<School[0].length; i++) {%>
+        //         <option class="slc"><%=School[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "OldStudent":
+        //             add_sel = `
+        //     <% for(var i=0; i<OldStudent[0].length; i++) {%>
+        //         <option class="slc"><%=OldStudent[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "Vlog":
+        //             add_sel = `
+        //     <% for(var i=0; i<Vlog[0].length; i++) {%>
+        //         <option class="slc"><%=Vlog[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "Live":
+        //             add_sel = `
+        //     <% for(var i=0; i<Live[0].length; i++) {%>
+        //         <option class="slc"><%=Live[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "Course":
+        //             add_sel = `
+        //     <% for(var i=0; i<Course[0].length; i++) {%>
+        //         <option class="slc"><%=Course[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //     }
+        //     $("#f_c").after(add_sel)
+        // });
+
+
+        // var edit_type = "Live";
+        // var edit_add_sel = `
+        //     <% for(var i=0; i<Live[0].length; i++) {%>
+        //         <option class="slc"><%=Live[0][i]%></option>
+        //         <% } %>`;
+        // $("#edit_c").after(edit_add_sel)
+        // $('#edit_type').change(function () {
+        //     edit_type = $('#edit_type').val();
+        //     // console.log(edit_type);
+        //     $("option").remove(".slc");
+        //     switch (edit_type) {
+        //         case "PartTimeJob":
+        //             edit_add_sel = `
+        //     <% for(var i=0; i<PartTimeJob[0].length; i++) {%>
+        //         <option class="slc"><%=PartTimeJob[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "School":
+        //             edit_add_sel = `
+        //     <% for(var i=0; i<School[0].length; i++) {%>
+        //         <option class="slc"><%=School[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "OldStudent":
+        //             edit_add_sel = `
+        //     <% for(var i=0; i<OldStudent[0].length; i++) {%>
+        //         <option class="slc"><%=OldStudent[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "Vlog":
+        //             edit_add_sel = `
+        //     <% for(var i=0; i<Vlog[0].length; i++) {%>
+        //         <option class="slc"><%=Vlog[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "Live":
+        //             edit_add_sel = `
+        //     <% for(var i=0; i<Live[0].length; i++) {%>
+        //         <option class="slc"><%=Live[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //         case "Course":
+        //             edit_add_sel = `
+        //     <% for(var i=0; i<Course[0].length; i++) {%>
+        //         <option class="slc"><%=Course[0][i]%></option>
+        //         <% } %>`
+        //             break
+        //     }
+        //     $("#edit_c").after(edit_add_sel)
+        // });
+
+    })
+</script>

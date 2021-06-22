@@ -1,0 +1,374 @@
+<script>
+    $(window).on("load", function(evt){
+        setTimeout(function(){
+            $(".loading-page").fadeOut("slow")
+        },1500)
+    })
+    tinyMCE.init({
+            selector: 'textarea.helpertinyeditor',
+            plugins: "image, advlist, table, autolink, code, link, lists, paste, preview, searchreplace, wordcount, emoticons, media",
+            toolbar: "styleselect | forecolor | backcolor | bold | italic | underline | alignleft | aligncenter | alignright | alignjustify | bullist | numlist | outdent | indent | link | image | media | code ",
+            paste_enable_default_filters: false,
+            paste_data_images: true,
+            automatic_uploads: true,
+            table_responsive_width: true,
+            images_reuse_filename: true,
+            images_upload_url: '/tinymceUploader',
+            height: 300
+        })
+        // Prevent Bootstrap dialog from blocking focusin
+    $(document).on('focusin', function(e) {
+        if ($(e.target).closest(".tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+            e.stopImmediatePropagation();
+        }
+    });
+    var pageDic = {
+        "about": "關於我們",
+        "index": "首頁",
+        "qna": "新生問答",
+        "life": "校園生活",
+        "coolgame": "小遊戲",
+        "documents": "新生必讀",
+        "groups": "系所社團",
+        "campus": "校園地圖",
+        "video": "影音專區",
+        "link": "常用連結"
+    }
+    var buildingData;
+    $.getJSON("/layouts/buildingData.json", function(data) {
+        buildingData = data;
+    })
+    var dinerData = {
+        "breakfast": ["哈堡堡輕食早午餐", "麥味登", "萊客堡", "萊姆斯","拉亞漢堡","瑞麟美而美","早安美芝城","麥堡堡","巧味香早餐","漢林大漢堡","美式早餐屋", "樂活堡","豪秋吐司", "金盃美而美", "蘋果203", "小木屋鬆餅"],
+        "meal": ["紅樓", "福泉豆花","歐姆萊斯", "負麵能量", "飽咖咖","無敵蛋餅","一品鍋","阿拉丁魔法咖哩","饕客滷味","一億燒餅車","咖哩老師","山頂丼人","霸王香雞排","比大爺滷味","香城燒臘小館","微笑轉角廚房","傻師傅湯包","京城","香煎小舖","幸福廚房","中壢正新明牛肉麵","忠貞米干米線","禮記十三香","麥克小姐","大相撲鹹水雞","泰爽快炒","米豆簡餐","滿食記","津知園排骨","八方雲集","廚窗食坊","大中央厚切牛排","迷路義麵屋","阿米玲食堂","歐姆萊斯","達啵廚房","白胡子平價牛排","香米便當","馬爾波咖啡","Daddys","No.17 White House","田園美食屋","鴻樂","吉米熊新點子早午餐","Sidewalk人行道蔬食(賽德沃克)","熱浪島南洋蔬食茶堂","九舍餐廳","松果餐廳","幸福時刻波蘭餐廳","照燒串物","福陞牛肉麵","雙醬咖哩","秘密基地","阿忠麵線","星Pasta","香恬園","韓林泡菜鍋","粥王","饕客滷味","老爹豆花","來客餐坊","臻功夫","緣杏廣東粥飯麵館","隨緣餐廳","雙寶爸涼麵","㸆窯","秈春坊素食"],
+        "dessert": ["福泉豆花","老爹豆花", "立橙", "Backdoor Café", "森呼吸豆花","108果汁","小惡魔複合式茶飲","夏克堤","燒餅窯","內卡小館 Neckar Bistro","清心福全","小木屋鬆餅","胡思胡作Backdoor Café","花茶大師"]
+    }
+    var messages = []
+    var msgTimer;
+    var curMsgID = Math.floor(Math.random() * messages.length)
+    $(function() {
+        var pageName = location.pathname.split('/')[1]
+        if (location.pathname == "/") {
+            pageName = "index";
+        }
+        $("#helper-message").hide()
+        $.ajax({
+            url: "/reminder/get",
+            type: "GET",
+            datatype: "json",
+            success: function(res) {
+                for (msg of res) {
+                    if (msg["page"] == pageName) {
+                        noHelperMsg = false;
+                        messages.push(msg["message"])
+                    }
+                    $("#messageTable tbody").append("<tr><td>" + pageDic[msg['page']] + "</td><td>" + msg['message'] + "</td><td><button dataid='" + msg["_id"] + "' class='btn btn-primary reminderDltBtn'><i class='fas fa-trash-alt'></i><span>刪除</span></button></td></tr>")
+                }
+                showHelper()
+                msgTimer = setInterval(function() {
+                    showHelper()
+                }, 10000) // 出現週期
+                addDltListener()
+            },
+            error: function() {
+                console.log("failed")
+            }
+        })
+        $("#reminderAddBtn").on("click", function(evt) {
+            $.ajax({
+                url: "/reminder/add",
+                type: "POST",
+                data: {
+                    "page": $("#page-name").val(),
+                    "message": tinyMCE.get('message-text').getContent()
+                },
+                datatype: "json",
+                success: function(res) {
+                    refreshData()
+                    $('#dataFillModal').modal('hide')
+                    alert(res.message)
+                },
+                error: function() {
+                    console.log("failed")
+                }
+            })
+        })
+        $("#sel-page-name").on("change", function() {
+            refreshData()
+        })
+
+        $("#menu-btn").click(function(evt) {
+            $("#header-menu").toggleClass("show")
+        })
+        $(".header-avatar").click(function(evt) {
+            $("#personal-menu").toggleClass("show")
+
+        })
+        var squirrelClickCount = 0;
+        $("#helper-squirrel").click(function(evt) {
+            squirrelClickCount++;
+            if (squirrelClickCount % 5 == 0) {
+                $("#helper-squirrel").attr("src", "/layouts/squirrelHitCrop.gif").on("load", function() {
+                    setTimeout(function(){
+                        $("#helper-squirrel").attr("src", "/layouts/squirrel.png")
+                        $("#helper-squirrel").off("load")
+                    }, 1500)
+                })
+            }
+            $("#helper-menu").toggleClass("show")
+            $(".littleHelper").toggleClass("menu-show")
+            $("#helper-bottom").toggleClass("hideMsg")
+        })
+
+        $(".helper-btn").click(function(evt) {
+            $("#helperModal-body").html("")
+            switch ($(this).attr("tag")) {
+                case "hint":
+                    $.ajax({
+                        url: "/reminder/get/" + pageName,
+                        type: "GET",
+                        datatype: "json",
+                        success: function(res) {
+                            var hintContent = `
+                                    <img src="/layouts/pin.png"/ id="helper-pin">
+                                    <h2 class="helper-modal-title" id="hint-title">
+                                        松鼠的叮嚀
+                                        <i class="fas fa-info-circle">
+                                            <div id="hint-tooltip">
+                                                <div class="tooltip-text">
+                                                    不同分頁有不同訊息喔!
+                                                </div>
+                                                <div class="arrow"></div>
+                                            </div>
+                                        </i>
+                                    </h2>
+                                    <div id="hint-window" class="content-wrapper">
+                                        <div id="hint-wrapper" id="hint-title">
+                                `
+                            for (i in res) {
+                                hintContent += `
+                                        <div class="hint-msg">
+                                            <img src="/layouts/clip${i%4+1}.png"/>
+                                            ${res[i]["message"]}
+                                        </div>`
+                            }
+                            hintContent += `</div></div>`
+                            $("#helperModal-body").html(hintContent)
+                            $("#helperModal").modal("show");
+                            $("#helper-menu").removeClass("show");
+                            $("#helper-bottom").removeClass("hideMsg");
+                        },
+                        error: function() {
+                            console.log("failed")
+                        }
+                    })
+                    break;
+                case "eat":
+                    $("#helperModal-body").html(
+                        `<h2 class="helper-modal-title" id="eatWhat-title"">今天吃什麼</h2>
+                        <div id="eatWhat-wrapper" class="content-wrapper initial">
+                            <div id="eatWhatBtnWrapper">
+                                <button id="eatWhat-startBtn">
+                                    <img src="/layouts/tapMe.gif"/ id="tapMeHint">
+                                    <img src="/layouts/eatWhatStart.gif"/ id="marioImg">
+                                </button>
+                                <div id="againText">親!不滿意嗎?<br>再一次</div>
+                            </div>
+                            <div id="eatWhat-result">
+                                <img src="/layouts/eatWhatResult.png"/ id="eatResultBg">
+                                <div id="eatResultText">米豆</div>
+                            </div>
+                            <div id="eatWhat-select">
+                                <button class="eatWhat-option selected" value="breakfast">早餐</button>
+                                <button class="eatWhat-option" value="meal">午/晚餐</button>
+                                <button class="eatWhat-option" value="dessert">甜點</button>
+                            </div>
+                        </div>`
+                    )
+                    $(".eatWhat-option").click(function() {
+                        $(".selected").removeClass("selected")
+                        $(this).addClass("selected")
+                    })
+                    $("#eatWhat-startBtn").click(function(evt) {
+                        var timer, i = 0,
+                            index = 0,
+                            newIndex;
+                        var option = $(".eatWhat-option.selected").attr("value");
+                        $("#eatWhat-wrapper").removeClass("initial")
+                        $("#marioImg").attr("src", "/layouts/eatWhatClick.gif")
+                        $("#tapMeHint").hide(0)
+                        $("#againText").hide(0)
+                        $("#eatWhat-startBtn").attr("disabled", true);
+                        $("#eatWhat-startBtn").css("cursor", "not-allowed");
+                        timer = setInterval(function() {
+                            do {
+                                newIndex = Math.floor(Math.random() * dinerData[option].length);
+                            } while (newIndex == index);
+                            index = newIndex;
+                            $("#eatResultText").text(dinerData[option][index])
+                        }, 80)
+                        setTimeout(function() {
+                            $("#eatWhat-startBtn").attr("disabled", false);
+                            $("#eatWhat-startBtn").css("cursor", "pointer");
+                            $("#tapMeHint").fadeIn(200)
+                            $("#againText").fadeIn(200)
+                            clearInterval(timer)
+                        }, 1000)
+                    })
+                    $("#helperModal").modal("show");
+                    $("#helper-menu").removeClass("show");
+                    $("#helper-bottom").removeClass("hideMsg");
+                    break;
+                case "nav":
+                    $("#helperModal-body").html(
+                        `<img src="/layouts/stars.png" alt="" id="decoStars">
+                        <img src="/layouts/rocket.png" alt="" id="decoRocket">
+                        <img src="/layouts/moon.png" alt="" id="decoMoon">
+                        <h2 class="helper-modal-title" id="nav-title">校園導航</h2>
+                        <div id="campusNav-wrapper">
+                            <div>
+                                <div id="campusNav-searchbar">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="campusNav-search" class="form-control" placeholder="點此搜尋系館編號和名字" name="search">
+                                </div>
+                                <div id="campusNav-example">搜尋範例: O-202, E2, 管理二館</div>
+                            </div>
+                            <div id="campusNav-result" class="content-wrapper">
+                            </div>
+                        </div>`
+                    )
+
+                    /*prevevnt pushing content up by mobile keyboard*/
+                    var scroll = $(window).scrollTop();
+                    $("#campusNav-search").on("blur", function() {
+                        $("html").scrollTop(scroll);
+                    })
+
+                    $("#campusNav-search").change(function() {
+                        var result = buildingData.filter(building => {
+                            var patt = new RegExp($("#campusNav-search").val().split('-')[0], 'i');
+                            return patt.test(building.name) || patt.test(building.code);
+                        })
+                        $("#campusNav-result").html("")
+                        for (building of result) {
+                            $("#campusNav-result").append(`
+                                <a href="${building.link}" target="_blank" class="search-result">${building.code}-${building.name}</a>
+                            `)
+                        }
+                    })
+                    $("#helperModal").modal("show");
+                    $("#helper-menu").removeClass("show");
+                    $("#helper-bottom").removeClass("hideMsg");
+                    break;
+            }
+        })
+        
+        $("#helper-message-close").click(function(){
+            /*hide helper while pressing cross icon on top right*/
+            $("#helper-message").css("visibility", "hidden")
+            $("#helper-message").css("visibility", "hidden")
+            $("#helper-message").css("display", "none")
+            clearInterval(msgTimer)
+        })
+
+        $('#helperModal').on('show.bs.modal hidden.bs.modal', function() {
+            $('body').toggleClass('modal-color-white');
+            $(".littleHelper").removeClass("menu-show")
+        });
+
+        $(window).click(function(evt) {
+            if (!evt.target.matches('#menu-btn') && !evt.target.matches('#header-menu *')) {
+                if ($("#header-menu").hasClass('show')) {
+                    $("#header-menu").removeClass("show");
+                }
+            }
+            if (!evt.target.matches('.header-avatar') && !evt.target.matches('#personal-menu *')) {
+                if ($("#personal-menu").hasClass('show')) {
+                    $("#personal-menu").removeClass("show");
+                }
+            }
+            if (!evt.target.matches('#helper-squirrel') && !evt.target.matches('#helper-menu *') && !evt.target.matches('#helperModal *')) {
+                if ($("#helper-menu").hasClass('show')) {
+                    $("#helper-menu").removeClass("show");
+                    $(".littleHelper").removeClass("menu-show")
+                    $("#helper-bottom").removeClass("hideMsg");
+                }
+            }
+        })
+    })
+
+    function showHelper() {
+        if (messages.length >= 1) {
+            $("#helper-message-text").stop(true, true).html(messages[curMsgID])
+        }
+        if (messages.length >= 2) {
+            do
+                var newMsgID = Math.floor(Math.random() * messages.length)
+            while (newMsgID == curMsgID)
+            curMsgID = newMsgID
+        }
+        if(messages.length>0){
+            $("#helper-message").stop(true,true).fadeIn(500)
+            setTimeout(function(){
+                $("#helper-message").stop(true,true).fadeOut(500)
+            }, 5000) // 持續時間
+        }
+    }
+
+
+    function refreshData() {
+        if ($("#sel-page-name").val() == "all") {
+            $.ajax({
+                url: "/reminder/get",
+                type: "GET",
+                datatype: "json",
+                success: function(res) {
+                    $("#messageTable tbody").html("")
+                    for (msg of res) {
+                        $("#messageTable tbody").append("<tr><td>" + pageDic[msg['page']] + "</td><td>" + msg['message'] + "</td><td><button dataid='" + msg["_id"] + "' class='btn btn-primary reminderDltBtn'><i class='fas fa-trash-alt'></i><span>刪除</span></button></td></tr>")
+                    }
+                    addDltListener()
+                    $('#reminderEditModal').modal('handleUpdate')
+                },
+                error: function() {
+                    console.log("failed")
+                }
+            })
+        } else {
+            $.ajax({
+                url: "/reminder/get/" + $("#sel-page-name").val(),
+                type: "GET",
+                datatype: "json",
+                success: function(res) {
+                    $("#messageTable tbody").html("")
+                    for (msg of res) {
+                        $("#messageTable tbody").append("<tr><td>" + pageDic[msg['page']] + "</td><td>" + msg['message'] + "</td><td><button dataid='" + msg["_id"] + "' class='btn btn-primary reminderDltBtn'><i class='fas fa-trash-alt'></i><span>刪除</span></button></td></tr>")
+                    }
+                    addDltListener()
+                    $('#reminderEditModal').modal('handleUpdate')
+                },
+                error: function() {
+                    console.log("failed")
+                }
+            })
+        }
+    }
+
+    function addDltListener() {
+        $(".reminderDltBtn").click(function(evt) {
+            var id = $(this).attr("dataid");
+            $.ajax({
+                url: "/reminder/delete/" + id,
+                type: "GET",
+                datatype: "json",
+                success: function(res) {
+                    refreshData()
+                    alert(res.message)
+                },
+                error: function() {
+                    console.log("failed")
+                }
+            })
+        })
+    }
+</script>

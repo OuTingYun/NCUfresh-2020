@@ -1,0 +1,143 @@
+
+<div id="helper-menu" class="littleHelper">
+  <div id="helper-btn-wrapper">
+    <div id="helper-hint-btn" tag="hint" class="helper-btn">
+      <h5>松鼠的叮嚀</h5>
+      <img src="/layouts/helperIcon/hint.png" alt="">
+    </div>
+    <div id="helper-eat-btn" tag="eat" class="helper-btn">
+      <h5>今天吃什麼</h5>
+      <img src="/layouts/helperIcon/eat.png" alt="">
+    </div>
+    <div id="helper-nav-btn" tag="nav" class="helper-btn">
+      <h5>校園導航</h5>
+      <img src="/layouts/helperIcon/nav.png" alt="">
+    </div>
+    <a href="https://forms.gle/J14nuSzSYrcmwAGf9" target="_blank" id="helper-problem-btn" tag="problem" class="helper-btn">
+      <h5>網站問題回報</h5>
+      <img src="/layouts/helperIcon/problem.png" alt="">
+    </a>
+    <div id="squirrel-block"></div>
+  </div>
+  <div id="helper-copyright" class="copyright">
+    <div id="helper-copyright-link">
+      <a href="https://www.facebook.com/ncufreshweb" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/ncufresh" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div id="helper-copyright-text">Copyright © 2020 NCU_Fresh 版權所有</div>
+  </div>
+</div>
+<div id="helper-bottom" class="littleHelper">
+  <div id="helper-message">
+    <div id="helper-message-text" class="message"></div>
+    <i id="helper-message-close" class="fas fa-times-circle"></i>
+  </div>
+  <img id="helper-squirrel" class="squirrel" src="/layouts/squirrel.png" alt=""/>
+  <%if(user && user.role==="admin"){%>
+    <i id="editHelperBtn" class="fas fa-edit" data-toggle="modal" data-target="#reminderEditModal"></i>
+  <%}%>
+</div>
+
+  <!-- Helper Modal -->
+<div class="modal fade" id="helperModal" tabindex="-1" role="dialog" aria-labelledby="helperModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content" id="helperModal-content">
+        <i class="fas fa-times" id="helperModal-close" data-dismiss="modal" aria-label="Close"></i>
+        <div class="modal-body " id="helperModal-body">
+          ...
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<%if(user && user.role==="admin"){%>
+  <!-- Helper Edit Modal -->
+  <div class="modal fade" id="reminderEditModal" tabindex="-1" role="dialog" aria-labelledby="reminderEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reminderEditModalLabel">小幫手訊息編輯</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <button id="openAddModalBtn" class="btn btn-primary" data-toggle="modal" data-target="#dataFillModal">
+            <i class="fas fa-plus"></i>
+            <span>新增</span>
+          </button>
+          <label for="sel-page-name">篩選頁面:</label>
+          <select name="page" id="sel-page-name">
+            <option value="all">全部</option>
+            <option value="index">首頁</option>
+            <option value="qna">新生問答</option>
+            <option value="life">校園生活</option>
+            <option value="coolgame">小遊戲</option>
+            <option value="documents">新生必讀</option>
+            <option value="groups">系所社團</option>
+            <option value="campus">校園地圖</option>
+            <option value="video">影音專區</option>
+            <option value="link">常用連結</option>
+            <option value="about">關於我們</option>
+            <option value="personal">個人專區</option>
+          </select>
+          
+          <table id="messageTable" class="table">
+            <thead>
+              <tr>
+                <th scope="col">頁面</th>
+                <th scope="col">訊息</th>
+                <th scope="col">控制選項</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- data fill modal -->
+  <div class="modal fade" id="dataFillModal" tabindex="-1" role="dialog" aria-labelledby="dataFillModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataFillModalLabel">小幫手訊息新增</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="ReminderDataFillForm">
+            <div class="form-group">
+              <label for="page-name">頁面:</label>
+              <select class="form-control" name="page" id="page-name">
+                <option value="index">首頁</option>
+                <option value="qna">新生問答</option>
+                <option value="life">校園生活</option>
+                <option value="coolgame">小遊戲</option>
+                <option value="documents">新生必讀</option>
+                <option value="groups">系所社團</option>
+                <option value="campus">校園地圖</option>
+                <option value="video">影音專區</option>
+                <option value="link">常用連結</option>
+                <option value="about">關於我們</option>
+                <option value="personal">個人專區</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">訊息:</label>
+              <textarea class="form-control helpertinyeditor" name="message" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="reminderAddBtn" form="ReminderDataFillForm">新增資料</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<%}%>

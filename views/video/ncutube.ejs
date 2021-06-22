@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" >
+
+       <!-- Swiper v4.1.0 -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/css/swiper.css" rel="stylesheet" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/js/swiper.js"></script>
+     
+    <link rel='stylesheet' href='/layouts/header.css' />
+    <link rel='stylesheet' href='/video/ncutube.css' />
+</head>
+
+
+<body>
+    <% include title_bar%>
+    <!-- <body> -->
+    <div class="BigPad">
+
+        <div id='box2'>
+            <div class='virtualbox'> </div>
+            <div div class="left_box" id='box3back' style="background-image: url('/video/ncutube/classify.png')">
+                <div class='menubtn'>
+                    <div class='menu_inti_posi' id="Bl1">
+                        <img src="/video/camera_page/bl1-1.png" class="pointer img_size_back" id='bl1'>
+                    </div>
+                    <div class='menutext'>
+                        <div class='insidetext fonttype'>
+                            中大生活
+                        </div>
+                    </div>
+                </div>
+                <div class='menubtn'>
+                    <div class='menu_inti_posi' id="Bl2">
+                        <img src="/video/camera_page/bl2-1.png" class="pointer img_size_back" id='bl2'>
+                    </div>
+                    <div class='menutext'>
+                        <div class='insidetext fonttype' id="Bl2-text">
+                            央央生存記
+                        </div>
+                    </div>
+                </div>
+                <div class='menubtn'>
+                    <div class='menu_inti_posi' id="Dr2">
+                        <img src="/video/camera_page/br2-1.png" class="pointer img_size_back" id=br2>
+                    </div>
+                    <div class='menutext'>
+                        <div class='insidetext fonttype'>
+                            學長姐訪談
+                        </div>
+                    </div>
+                </div>
+
+                <div class='menubtn'>
+                    <div class='menu_inti_posi' id="Dr3">
+                        <img src="/video/camera_page/br3-1.png" class="pointer img_size_back" id=br3>
+                    </div>
+                    <div class='menutext'>
+                        <div class='insidetext fonttype'>
+                            新知逼露葛
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left_box" id='box3arrow'>
+                <div class='menubtn'>
+                    <img src="/video/ncutube/catfeet.png" class="catfeet" id='l1arrow'>
+
+                </div>
+                <div class='menubtn'>
+                    <img src="/video/ncutube/catfeet.png" class="catfeet" id='l2arrow'>
+                </div>
+                <div class='menubtn'>
+                    <img src="/video/ncutube/catfeet.png" class="catfeet" id='r2arrow'>
+                </div>
+                <div class='menubtn'>
+                    <img src="/video/ncutube/catfeet.png" class="catfeet" id='r3arrow'>
+                </div>
+            </div>
+            <div class="left_box" id='box3'>
+                <a href="#l1bar">
+                    <div class='menubtn'>
+                        <div class='menu_inti_posi' id="L1">
+                            <img src="/video/camera_page/l1.png" class="img_size pointer" id="l1">
+                        </div>
+                        <div class='menutext'></div>
+                    </div>
+
+                </a><a href="#l2bar">
+                    <div class='menubtn'>
+                        <div class='menu_inti_posi' id="L2">
+                            <img src="/video/camera_page/l2.png" class=" img_size pointer" id="l2">
+                        </div>
+                        <div class='menutext'>
+
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#r2bar">
+                    <div class='menubtn'>
+                        <div class='menu_inti_posi' id="R2">
+                            <img src="/video/camera_page/r2.png" class="img_size pointer" id="r2">
+
+                        </div>
+                        <div class='menutext'>
+
+                        </div>
+                    </div>
+                </a> <a href="#r3bar">
+                    <div class='menubtn'>
+                        <div class='menu_inti_posi' id="R3">
+                            <img src="/video/camera_page/r3.png" class=" img_size pointer" id="r3">
+                        </div>
+                        <div class='menutext'>
+
+                        </div>
+                    </div>
+                </a>
+                <a id="time_a" target="_blank">
+                    <img src="/video/ncutube/timecount.png" id="timecount" class="timec">
+                    <img src="/video/ncutube/timecounthover.png" id="timecounthover" class="timec">
+                </a>
+            </div>
+        </div>
+        <%include content%>
+    </div>
+
+</body>
+<% include ../layouts/head %>
+<% include ncutubeJS%>
+
+
+</html>

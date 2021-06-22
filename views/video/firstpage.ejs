@@ -1,0 +1,215 @@
+<script>
+    //相機動畫
+    var phone_mode = false;
+    var btnline = false;
+    var open = false;
+
+    function phone_mode_check() {
+        wdth = $(window).width();
+        height = $(window).height();
+        if (wdth < 745 || height < 400) {
+            $(".ncutube_text").text(" ");
+            q2 = [
+                function () {
+                    $(".circle").animate({
+                        width: "43px",
+                        height: "43px"
+                    }, 500)
+                    $("#glass").animate({
+                        width: "43",
+                        height: "43",
+                    }, 500)
+                    $(".camera").animate({
+                        width: "100px",
+                        height: "55px",
+                        top: "3%",
+                        left: "4.5%"
+                    }, 600)
+                    next1();
+                },
+                function () {
+
+                    $(".line").removeClass("borderclass_li");
+                    $(".rectangle").removeClass("borderclass_re");
+                    $(".circle").removeClass("borderclass_cir");
+                    $(".camera_btn").removeClass("borderclass1");
+                    $(".line").addClass("border_set");
+                    $(".rectangle").addClass("border_set");
+                    $(".circle").addClass("border_set_cir");
+                    $(".camera_btn").addClass("border_set");
+                    setTimeout(
+                        function () {
+
+                            $("#D1").trigger("click");
+                        },
+                        500);
+                }
+            ]
+
+            function next1() {
+                $(".rectangle").dequeue("my5")
+            }
+            $(".rectangle").queue("my5", q2);
+            // $("camera").removeClass("fadeInDown");
+            next1();
+        } else {
+
+            $(".ncutube_text").text("N  C  U  T  U  B  E");
+            if (!open) {
+                $("#tapherebox").css({
+                    "width": "153px",
+                    "height": '90px',
+                })
+                $("#tapheretext").text("TAP HERE")
+            }
+        }
+    }
+    $(document).ready(function () {
+        wdth = $(window).width();
+        height = $(window).height();
+        if (wdth < 670 || height < 300) {
+            phone_mode = true;
+        }
+        //拿衣服
+        $(window).resize(function () {
+            phone_mode_check();
+        });
+        var q = [
+            function () {
+                $(this).addClass("borderclass_re");
+                $(this).animate({
+                    width: '100%',
+                }, next);
+            },
+            function () {
+                $(this).animate({
+                    height: '100%'
+                }, next)
+            },
+            function () {
+                $(".line").addClass("borderclass_li");
+                $('.line').animate({
+                    width: "100%",
+                    height: "57%"
+                }, next)
+            },
+            function () {
+                $('.camera_btn').addClass("borderclass1");
+                $('.camera_btn').animate({
+                    width: "13%",
+                    height: "13%"
+                }, next)
+            },
+            function () {
+                $("#glass").animate({
+                    width: "120px",
+                    height: "120px",
+                }, next)
+            },
+            function () {
+                $(".circle").addClass("borderclass_cir");
+                $('.circle').css({
+                    "width": "106px",
+                    "height": "106px"
+                })
+                $('.camera_btn').css("background-color", "#6C9EAD")
+                $('.rectangle').css("background-color", "#FFF3DB")
+                $('.line').css("background-color", "#6C9EAD")
+                phone_mode_check();
+            }
+        ]
+
+        function next() {
+            $("#top").dequeue("my")
+        }
+        $("#top").queue("my", q);
+        next();
+        $('.camera').mouseover(function () {
+            $(this).addClass('animate__bounce animate__infinite')
+            // $(this).addClass('infinite')
+        })
+        $('.camera').mouseout(function () {
+            $(this).removeClass('animate__infinite')
+        })
+
+        $(".menu_inti_posi").mouseover(function () {
+            $(this).children('.img_size').addClass("bye")
+            $(this).children('.img_size_back').addClass("img_size_back3")
+        })
+        $(".menu_inti_posi").mouseout(function () {
+            $(this).children('.img_size_back').removeClass("img_size_back3")
+            $(this).children('.img_size').removeClass("bye")
+        })
+        $(".camera").click(function () {
+            if (!phone_mode) {
+                if (!open) {
+                    $(".img_size").addClass("real_size");
+                    $("#D1").animate({
+                        top: "81px",
+                        left: "0px"
+                    }, 500)
+                    $("#D2").animate({
+                        top: "-60px",
+                        left: "127px"
+                    }, 500)
+                    $("#Dr2").animate({
+                        top: "-60px",
+                        left: "374px"
+                    }, 500)
+                    $("#Dr3").animate({
+                        top: "81px",
+                        left: "564"
+                    }, 500)
+                    $("#tapheretext").text("")
+                    $("#tapherebox").css({
+                        "width": "0px",
+                        "height": '0px',
+                    })
+                    open = true;
+                } else {
+                    $(".menu_inti_posi").animate({
+                        top: "150px",
+                        left: "45%"
+                    }, 500)
+                    $(".real_size").addClass("img_size");
+                    $(".img_size_back3").addClass("img_size_back");
+                    $("#tapherebox").css({
+                        "width": "153px",
+                        "height": '90px',
+                    })
+                    $("#tapheretext").text("TAP HERE")
+                    open = false;
+                }
+            }
+        })
+        $(window).resize(function () {
+            if (phone_mode) phone_check()
+        });
+        // header
+        $("#menu-btn").click(function (evt) {
+            $("#header-menu").toggleClass("show")
+        })
+
+        $("#personal-avatar").click(function (evt) {
+
+            $("#personal-menu").toggleClass("show")
+        })
+
+        $(window).click(function (evt) {
+
+            if (!evt.target.matches('#menu-btn') && !evt.target.matches('#header-menu *')) {
+                if ($("#header-menu").hasClass('show')) {
+
+                    $("#header-menu").removeClass("show");
+                }
+            }
+            if (!evt.target.matches('#personal-avatar') && !evt.target.matches(
+                    '#personal-menu *')) {
+                if ($("#personal-menu").hasClass('show')) {
+
+                    $("#personal-menu").removeClass("show");
+                }
+            }
+        })
+    })
+</script>

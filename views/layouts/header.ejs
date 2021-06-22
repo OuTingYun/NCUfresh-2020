@@ -1,0 +1,84 @@
+<header id="header">
+    <a href="/"><img id="header-logo" src="/layouts/logo.png"></a>
+    <div id="menu-control">
+        <%if (user===undefined){%>
+            <div id="personal-drop-btn">
+                <a id="avatar-img" href="/login" style="background-image: url('/layouts/default-avatar.png');"></a>
+            </div>
+        <%}else{%>
+            <div id="dropdown-personal">
+                <button id="personal-drop-btn">
+                    <%if(user.avatar==="default-avatar.png"){%>
+                        <img id="default-avatar" class="header-avatar" src="/personal/avatar/<%= user.avatar %>" >
+                    <%}else if(user.avatar==="iron_man.jpg"){%>
+                        <img id="ironman-avatar" class="header-avatar" src="/personal/avatar/<%= user.avatar %>" >
+                    <%}else{%>
+                        <img id="personal-avatar" class="header-avatar" src="/personal/avatar/<%= user.avatar %>" >
+                    <%}%>
+                </button>
+                    <div id="personal-menu">
+                        <img id="personal-img" src="/personal/avatar/<%= user.avatar %>">
+                        <div id="username">
+                            <%=user.name%>
+                                <div id="userunit">
+                                    <%=user.unit%>
+                                </div>
+                        </div>
+                        <div id="personal-controls">
+                            <a id="personal-btn" href="/personal">我的個人專區</a>
+                            <a id="logout" href="/logout">登出</a>
+                        </div>
+                    </div>
+            </div>
+        <%}%>
+        <div id="dropdown-menu">
+            <button id="drop-btn">
+                <img id="menu-btn" src="/layouts/menuBtn.png" alt="">
+            </button>
+            <div id="header-menu">
+                <div class="row">
+                    <a href="/documents" class="link-wrapper">
+                        <img src="/layouts/menuIcon/document.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/document.png" alt="" class="link-title">
+                    </a>
+                    <a href="/qna" class="link-wrapper">
+                        <img src="/layouts/menuIcon/qna.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/qna.png" alt="" class="link-title">
+                    </a>
+                    <a href="/campus" class="link-wrapper">
+                        <img src="/layouts/menuIcon/map.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/map.png" alt="" class="link-title">
+                    </a>
+                </div>
+                <div class="row">
+                    <a href="/groups" class="link-wrapper">
+                        <img src="/layouts/menuIcon/group.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/group.png" alt="" class="link-title">
+                    </a>
+                    <a href="/life" class="link-wrapper">
+                        <img src="/layouts/menuIcon/life.png" alt="" class="menuIcon">
+                        <img id="nculife" src="/layouts/linkTitle/life.png" alt="" class="link-title">
+                    </a>
+                    <a href="/video" class="link-wrapper" target="_blank">
+                        <img src="/layouts/menuIcon/video.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/video.png" alt="" class="link-title">
+                    </a>
+                </div>
+                <div class="row">
+                    <a href="/link" class="link-wrapper">
+                        <img src="/layouts/menuIcon/link.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/link.png" alt="" class="link-title">
+                    </a>
+                    <a href="/coolgame" class="link-wrapper">
+                        <img src="/layouts/menuIcon/game.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/game.png" alt="" class="link-title">
+                    </a>
+                    <a href="/about" class="link-wrapper">
+                        <img src="/layouts/menuIcon/about.png" alt="" class="menuIcon">
+                        <img src="/layouts/linkTitle/about.png" alt="" class="link-title">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

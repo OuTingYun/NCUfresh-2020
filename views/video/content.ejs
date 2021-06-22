@@ -1,0 +1,180 @@
+<div id='box4'>
+    <div id=virtualshowbox></div>
+    <div class="bar" id="l1bar"></div>
+
+    <div class='textbar'>
+        <div class="widthbox_middlebox">
+            <div class="middle_text fonttype">
+                中大生活
+            </div>
+        </div>
+    </div>
+
+    <div class="contentMenu" id="Live">
+        <div class="swiper-container" id="Live_container">
+            <div class="swiper-wrapper">
+                <% for(var i=0; i<Live[0].length; i++) {%>
+                <div class="swiper-slide">
+                    <img src="/video/video_cover/Live/<%=Live[2][i]%>" class="test" id="img$<%=Live[0][i]%>"
+                        data-toggle="modal" data-target="#videomodel">
+                </div>
+                <% } %>
+            </div>
+            <div class="swiper-pagination" id='Live_pagination'></div>
+        </div>
+
+
+
+        <div class="pagebtnright" id="Live_r"><img src="/video/ncutube/right.png" class='btnpic'></div>
+        <div class="pagebtnleft" id="Live_l"><img src="/video/ncutube/left.png" class='btnpic'></div>
+    </div>
+
+    <div class="contentMenu2" id="Live2">
+        <% for(var i=0; i<Live[0].length; i++) {%>
+        <div class="widthbox">
+            <div class="player_class" id='<%=Live[0][i]%>'>
+                <img src="/video/video_cover/Live/<%=Live[2][i]%>" class="test" id="img<%=Live[0][i]%>">
+                <div id="player<%=Live[0][i]%>" class="bye" id='Live_pagination'></div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+
+
+
+
+
+    <div class="bar" id="l2bar"></div>
+    <div class='textbar'>
+        <div class="widthbox_middlebox">
+            <div class="middle_text fonttype">
+                央央生存記
+            </div>
+        </div>
+    </div>
+
+    <div class="contentMenu" id="School">
+        <div class="swiper-container" id="School_container">
+            <div class="swiper-wrapper">
+                <% for(var i=0; i<School[0].length; i++) {%>
+                <div class="swiper-slide">
+                    <img src="/video/video_cover/School/<%=School[2][i]%>" class="test" id="img$<%=School[0][i]%>"
+                        data-toggle="modal" data-target="#videomodel">
+                </div>
+                <% } %>
+            </div>
+            <div class="swiper-pagination" id='School_pagination'></div>
+        </div>
+
+        <div class="pagebtnright" id="School_r"><img src="/video/ncutube/right.png" class='btnpic'></div>
+        <div class="pagebtnleft" id="School_l"><img src="/video/ncutube/left.png" class='btnpic'></div>
+    </div>
+
+    <div class="contentMenu2" id="School2">
+        <% for(var i=0; i<School[0].length; i++) {%>
+        <div class="widthbox">
+            <div class="player_class" id='<%=School[0][i]%>'>
+                <img src="/video/video_cover/School/<%=School[2][i]%>" class="test" id="img<%=School[0][i]%>">
+                <div id="player<%=School[0][i]%>" class="bye"></div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+
+
+    <div class="bar" id="r2bar"></div>
+    <div class='textbar'>
+
+        <div class="widthbox_middlebox">
+            <div class="middle_text fonttype">
+                學長姐訪談
+            </div>
+        </div>
+    </div>
+
+    <div class="contentMenu" id="OldStudent">
+        <div class="swiper-container" id="OldStudent_container">
+            <div class="swiper-wrapper">
+                <% for(var i=0; i<OldStudent[0].length; i++) {%>
+                <div class="swiper-slide">
+                    <img src="/video/video_cover/OldStudent/<%=OldStudent[2][i]%>" class="test"
+                        id="img$<%=OldStudent[0][i]%>" data-toggle="modal" data-target="#videomodel">
+                </div>
+                <% } %>
+            </div>
+            <div class="swiper-pagination" id='OldStudent_pagination'></div>
+        </div>
+
+        <div class="pagebtnright" id="OldStudent_r"><img src="/video/ncutube/right.png" class='btnpic'></div>
+        <div class="pagebtnleft" id="OldStudent_l"><img src="/video/ncutube/left.png" class='btnpic'></div>
+    </div>
+
+    <div class="contentMenu2" id="OldStudent2">
+        <% for(var i=0; i<OldStudent[0].length; i++) {%>
+        <div class="widthbox">
+            <div class="player_class" id='<%=OldStudent[0][i]%>'>
+                <img src="/video/video_cover/OldStudent/<%=OldStudent[2][i]%>" class="test"
+                    id="img<%=OldStudent[0][i]%>">
+                <div id="player<%=OldStudent[0][i]%>" class="bye"></div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+
+
+    <div class="bar" id="r3bar"></div>
+    <div class='textbar'>
+        <div class="widthbox_middlebox">
+            <div class="middle_text fonttype">
+                新知逼露葛
+            </div>
+        </div>
+    </div>
+
+    <div class="contentMenu" id="Vlog">
+        <div class="swiper-container" id="Vlog_container">
+            <div class="swiper-wrapper">
+                <% for(var i=0; i<Vlog[0].length; i++) {%>
+                <div class="swiper-slide">
+                    <img src="/video/video_cover/VLOG/<%=Vlog[2][i]%>" class="test" id="img$<%=Vlog[0][i]%>"
+                        data-toggle="modal" data-target="#videomodel">
+                </div>
+                <% } %>
+            </div>
+            <div class="swiper-pagination" id='Vlog_pagination'></div>
+        </div>
+
+
+    </div>
+
+    <div class="contentMenu2" id="Vlog2">
+        <% for(var i=0; i<Vlog[0].length; i++) {%>
+        <div class="widthbox">
+            <div class="player_class" id='<%=Vlog[0][i]%>'>
+                <img src="/video/video_cover/VLOG/<%=Vlog[2][i]%>" class="test" id="img<%=Vlog[0][i]%>">
+                <div id="player<%=Vlog[0][i]%>" class="bye"></div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="videomodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" id="table">
+
+                <div class="modal-body">
+                    <div id="video_place">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

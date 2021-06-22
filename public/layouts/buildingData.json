@@ -1,0 +1,132 @@
+[
+  {
+    "code": "A",
+    "name": "文學一館",
+    "link": "https://goo.gl/maps/dmBrr4xnK1JeytGB8"
+  },
+  {
+    "code": "C2",
+    "name": "文學二館",
+    "link": "https://goo.gl/maps/LAnvszz6ZfMrTFEM6"
+  },
+  {
+    "code": "E",
+    "name": "工程一館",
+    "link": "https://goo.gl/maps/u5o81ZpRuXcqcgWTA"
+  },
+  {
+    "code": "E1",
+    "name": "工程二館(資電學院辦公室)",
+    "link": "https://goo.gl/maps/AGSD5vLvzPScE44s9"
+  },
+  {
+    "code": "E2",
+    "name": "工程三館(機械館)",
+    "link": "https://goo.gl/maps/nVEe2kNxa8waVxx49"
+  },
+  {
+    "code": "E3",
+    "name": "環工化工館",
+    "link": "https://goo.gl/maps/ChtrH8B9tM7phi6W9"
+  },
+  {
+    "code": "E4",
+    "name": "機電實驗室",
+    "link": "https://goo.gl/maps/8Dx9stdKYXNXmkDu8"
+  },
+  {
+    "code": "E5",
+    "name": "大型力學實驗室",
+    "link": "https://goo.gl/maps/6etywwTHiAtr1sEX6"
+  },
+  {
+    "code": "E6",
+    "name": "工程五館大樓(工學院辦公室)",
+    "link": "https://goo.gl/maps/8jDtoAht8tX9chLR7"
+  },
+  {
+    "code": "H2",
+    "name": "理學院教學館(原普化實驗大樓)",
+    "link": "https://goo.gl/maps/vLByMzVArpChbsJY7"
+  },
+  {
+    "code": "HK",
+    "name": "客家學院大樓(客家學院辦公室)",
+    "link": "https://goo.gl/maps/utfxMNFvBgn3DXDb7"
+  },
+  {
+    "code": "I",
+    "name": "志希館(管理學院辦公室)",
+    "link": "https://goo.gl/maps/zr62NusULfHfjFXG8"
+  },
+  {
+    "code": "I1",
+    "name": "管理二館",
+    "link": "https://goo.gl/maps/EBum6jS2MmY6KFZ57"
+  },
+  {
+    "code": "IL",
+    "name": "國鼎光電大樓",
+    "link": "https://goo.gl/maps/2KM5SHr7AMwScByKA"
+  },
+  {
+    "code": "L3",
+    "name": "國鼎圖書資料館",
+    "link": "https://goo.gl/maps/PagQexZyk9eixE567"
+  },
+  {
+    "code": "LS",
+    "name": "人文社會科學大樓(文學院辦公室)",
+    "link": "https://goo.gl/maps/Qmw1d2TtE6G1HDLq5"
+  },
+  {
+    "code": "M",
+    "name": "鴻經館",
+    "link": "https://goo.gl/maps/5pg7urBkkxFekNvp6"
+  },
+  {
+    "code": "O",
+    "name": "綜教館(語言中心)",
+    "link": "https://goo.gl/maps/Ng1hennaUCiGdATq6"
+  },
+  {
+    "code": "R2",
+    "name": "太空及遙測研究中心",
+    "link": "https://goo.gl/maps/mm15eTgFw8S4aXHB8"
+  },
+  {
+    "code": "R3",
+    "name": "研究中心大樓二期(生醫理工學院辦公室)",
+    "link": "https://goo.gl/maps/ohjCWqRE1GomWqma8"
+  },
+  {
+    "code": "S",
+    "name": "科學一館(地科院辦公室)",
+    "link": "https://goo.gl/maps/BpqNodS4QFwHgPTa7"
+  },
+  {
+    "code": "S1",
+    "name": "科學二館(理學院辦公室)",
+    "link": "https://goo.gl/maps/ufeZu4MCMxUkeCmv8"
+  },
+  {
+    "code": "S2",
+    "name": "科學三館",
+    "link": "https://goo.gl/maps/UQrJgUM6skyriB459"
+  },
+  {
+    "code": "S4",
+    "name": "健雄館(科學四館)",
+    "link": "https://goo.gl/maps/Ja8erC8nGnnNfi7L9"
+  },
+  {
+    "code": "S5",
+    "name": "科學五館",
+    "link": "https://goo.gl/maps/L2qsydbpTmEHbSvq6"
+  },
+  {
+    "code": "YH",
+    "name": "依仁堂(體育館)",
+    "link": "https://goo.gl/maps/kv4PmB1cXponk3Kg6"
+  }
+]

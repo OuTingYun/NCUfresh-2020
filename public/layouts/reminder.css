@@ -1,0 +1,570 @@
+.littleHelper {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  animation-duration: 1s;
+  font-family: "nSimSun";
+}
+
+.littleHelper .message {
+  padding: 18px 25px;
+  margin-right: 10px;
+  /* height: 60px; */
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.helper-modal-title{
+  font-weight: bold;
+}
+
+/* width */
+.content-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+.content-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.content-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+.content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+#helperModal{
+  background-color: rgba(255, 255, 255, 0.9);
+  font-family: 'nSimSun';
+}
+#helperModal .modal-dialog{
+  max-width: 500px;
+}
+#helperModal-body{
+  overflow: hidden;
+  padding: 20px;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+}
+.modal-color-white .modal-backdrop{
+  opacity:0 !important;
+}
+#helper-menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#helper-menu #helper-btn-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+#helper-menu.show{
+  visibility: visible;
+  opacity: 1;
+}
+#helper-menu.show .helper-btn h5{
+  animation: fadeIn 0.5s forwards;
+}
+#helper-menu.show #helper-hint-btn h5{
+  animation-delay: 0.5s;
+}
+#helper-menu.show #helper-eat-btn h5{
+  animation-delay: 0.7s;
+}
+#helper-menu.show #helper-nav-btn h5{
+  animation-delay: 0.9s;
+}
+#helper-menu.show #helper-problem-btn h5{
+  animation-delay: 1.1s;
+}
+#helper-menu #helper-hint-btn{
+  transform: translate(0px, 60px);
+}
+#helper-menu #helper-eat-btn{
+  transform: translate(-100px, 60px);
+}
+#helper-menu #helper-nav-btn{
+  transform: translate(-100px, 80px);
+}
+#helper-menu #helper-problem-btn{
+  transform: translate(0px, 80px);
+}
+#helper-copyright{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 10px 20px;
+  font-family: 微軟正黑體;
+}
+#helper-copyright-link{
+  height: 35px;
+}
+#helper-copyright-link a{
+  margin-right: 5px;
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.fa-facebook:hover{
+  color: #036AE3;
+}
+.fa-instagram:hover{
+  background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#helper-copyright-text{
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+}
+#helper-bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  transition: 0.2s;
+}
+#helper-bottom #helper-message{
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+#helper-message:hover #helper-message-close{
+  visibility: visible;
+  opacity: 1;
+}
+#helper-message-close{
+  position: absolute;
+  top: -8px;
+  right: -3px;
+  cursor: pointer;
+  font-size: 20px;
+  visibility: hidden;
+  opacity: 0;
+}
+#helper-bottom.hideMsg #helper-message{
+  opacity: 0;
+  visibility: hidden;
+  display: none !important;
+}
+.helper-btn{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.helper-btn h5{
+  opacity: 0;
+  margin-bottom: 0;
+}
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+.helper-btn:hover img{
+  transform: scale(1.1);
+}
+.helper-btn img{
+  transition: 0.2s;
+  width: 60px;
+  margin-left: 10px;
+}
+#helper-problem-btn{
+  color: #333;
+}
+#squirrel-block{
+  width: 80px;
+  height: 80px;
+}
+.littleHelper .message p{
+  margin: 0;
+}
+#helper-squirrel{
+  cursor: pointer;
+  width: 80px;
+}
+#helper-bottom.menu-show{
+  position: fixed;
+  bottom: 110px;
+  right: 0;
+}
+#messageTable {
+  margin-top: 10px;
+}
+i {
+  margin-right: 5px;
+}
+#openAddModalBtn{
+  float: right;
+}
+#editHelperBtn{
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  cursor: pointer;
+}
+#helperModal-header{
+  border-bottom: none;
+  width: 100%;
+}
+#helperModal-content{
+  border-radius: 20px;
+  background-color: #DAD1C6;
+}
+#helperModal-close{
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  z-index: 1060;
+  left: 0;
+  top: 0;
+  padding: 20px;
+}
+/*hint helper*/
+#hint-wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 11px 0;
+}
+#hint-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+#hint-title i{
+  position: relative;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+#hint-title i:hover #hint-tooltip{
+  opacity: 1;
+}
+
+#hint-tooltip{
+  position: absolute;
+  z-index: 1050;
+  top: -35px;
+  left: -82px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  opacity: 0;
+  transition: 0.2s;
+}
+#hint-tooltip .arrow{
+  position: relative;
+  z-index: 1050;
+  width: 10px;
+  height: 10px;
+  background-color: #222;
+  transform: rotate(45deg) translateY(-8px)
+}
+#hint-tooltip .tooltip-text{
+  position: relative;
+  z-index: 1051;
+  padding: 7px 10px;
+  width: 170px;
+  font-size: 12px;
+  background-color: #222;
+  border-radius: 4px;
+  text-align: center;
+}
+
+#hint-window{
+  height: 300px;
+  overflow-y: auto;
+}
+#helper-pin{
+  position: absolute;
+  width: 50px;
+  top: 2%;
+  right: 5%;
+}
+.hint-msg{
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #F9FAEC;
+  background-image: linear-gradient(rgba(100, 100, 100, 0.1) 10%,rgba(100, 100, 100, 0.1) 12%,transparent 13%,transparent 100%), linear-gradient(90deg, rgba(100, 100, 100, 0.1) 10%,rgba(100, 100, 100, 0.1) 12%,transparent 13%,transparent 100%);
+  background-size: 10px 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px;
+  padding-top: 35px;
+  overflow: visible;
+}
+.hint-msg:last-child{
+  margin-bottom: 0;
+}
+.hint-msg img{
+  position: absolute;
+  left: 20px;
+  top: -11px;
+  height: 40px;
+}
+.hint-msg p{
+  position: relative;
+  margin: 0;
+}
+#campusNav-wrapper{
+  position: relative;
+  height: 300px;
+}
+#campusNav-wrapper #campusNav-search{
+  border-radius: 20px;
+  padding-left: 30px;
+  margin-left: 30px;
+}
+#campusNav-example{
+  padding-left: 40px;
+}
+#campusNav-searchbar i{
+  position: absolute;
+  font-size: 16px;
+  left: 40px;
+}
+#nav-title{
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+#campusNav-searchbar{
+  display: flex;
+  align-items: center;
+  width: 300px;
+  max-width: 100%;
+}
+#campusNav-result{
+  margin-top: 20px;
+  margin-left: 26%;
+  margin-right: 5%;
+  height: 250px;
+  overflow-y: auto;
+}
+#campusNav-wrapper .search-result{
+  border: 1px solid #333;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 15px;
+  display: block;
+  color: #333;
+}
+#decoMoon{
+  position: absolute;
+  width: 30%;
+  bottom: 0;
+  left: 0;
+}
+#decoRocket{
+  position: absolute;
+  width: 30%;
+  top: 0;
+  right: 0;
+}
+#decoStars{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+}
+#eatWhat-wrapper{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 400px;
+  transition: 0.5s;
+}
+#eatWhat-wrapper.initial {
+  transition: 0.5s;
+}
+#eatWhat-wrapper.initial #eatWhat-startBtn{
+  width: 75%;
+  height: 75%;
+  transform: translate(40px, 80px);
+  transition: inherit;
+}
+#eatWhat-wrapper.initial #againText{
+  display: none;
+}
+#eatWhat-wrapper.initial #eatWhat-result{
+  transition: inherit;
+  visibility: hidden;
+  opacity: 0;
+}
+#eatWhat-title{
+  position: absolute;
+  writing-mode: vertical-rl;
+  letter-spacing: 10px;
+  left: 0;
+  top: 0;
+  margin: 60px 20px;
+}
+#eatWhat-select{
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+#eatWhat-wrapper #eatWhat-result{
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+  font-size: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+}
+#eatWhat-result{
+  transition: 0.5s;
+}
+#eatWhat-result img{
+  width: 300px;
+  max-width: 100%;
+}
+#eatResultText{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 20px;
+  font-family: "微軟正黑體";
+  transform: translateX(-50%);
+}
+#eatWhatBtnWrapper{
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+}
+#eatWhat-startBtn{
+  position: relative;
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  transition: 0.5s;
+}
+#eatWhat-startBtn img{
+  object-fit: contain;
+  width: 100%;
+}
+#eatWhat-startBtn #tapMeHint{
+  width: 60%;
+  position: absolute;
+  top: -20%;
+  right: -10%;
+}
+.eatWhat-option{
+  cursor: pointer;
+  margin-right: 25px;
+  font-size: 20px;
+  transition: 0.2s ease-out;
+}
+#eatWhat-startBtn, .eatWhat-option{
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+#eatWhat-startBtn:focus, .eatWhat-option:focus{
+  border: none;
+  outline: none;
+}
+.eatWhat-option.selected{
+  transform: scale(1.4);
+}
+.eatWhat-option:last-child{
+  margin: 0;
+}
+/* 預設樣式為電腦版 */
+
+/* 小螢幕 (e.g.橫躺手機) 577~767px */
+@media (max-width: 767px) {
+  .littleHelper .message {
+    padding: 0;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  #squirrel-block{
+    width: 65px;
+    height: 65px;
+  }
+  #helper-bottom.menu-show{
+    bottom: 0;
+  }
+  #helper-squirrel{
+    width: 70px;
+  }
+  .helper-btn{
+    margin-bottom: 8px;
+  }
+  .littleHelper .message p{
+    padding: 10px 20px;
+  }
+  #helper-menu #helper-hint-btn{
+    transform: none;
+  }
+  #helper-menu #helper-eat-btn{
+    transform: none;
+  }
+  #helper-menu #helper-nav-btn{
+    transform: none;
+  }
+  #helper-menu #helper-problem-btn{
+    transform: none;
+  }
+  #eatWhat-title{
+    writing-mode: horizontal-tb;
+    letter-spacing: 5px;
+    margin: 20px 50px;
+  }
+  #eatWhat-wrapper.initial #eatWhat-startBtn {
+    width: 85%;
+    height: 85%;
+    transform: translate(5vw, 12vh);
+    transition: inherit;
+  }
+  #eatWhatBtnWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+  }
+}
+
+/* 超小螢幕 (e.g.直立手機), 576px以下 */
+@media (max-width: 576px) {  }

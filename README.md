@@ -16,17 +16,17 @@ Nodejs = 16.3.0
 
 ### Home Page
 
-https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/start.gif
+![gifs](https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/start.gif)
 
-https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/nav-bar.gif
+![gifs](https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/nav-bar.gif)
 
 ### NCU tube Page
 
-https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/content.gif
+![gifs](https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/content.gif)
 
 ### Phone mode
 
-https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/Phone.gif
+![gifs](https://github.com/OuTingYun/Images/blob/master/NCUfresh2020/Phone.gif)
 
 
 ### Collaborators
